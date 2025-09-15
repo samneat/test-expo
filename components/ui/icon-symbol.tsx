@@ -21,9 +21,20 @@ const MAPPING = {
 } as IconMapping;
 
 /**
- * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
- * This ensures a consistent look across platforms, and optimal resource usage.
- * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
+ * An icon component that uses native SF Symbols on iOS and falls back to Material Icons on
+ * Android and web. This ensures a consistent look across platforms while using native resources
+ * where possible.
+ *
+ * The `name` prop is based on SF Symbol names and requires a manual mapping to Material Icons
+ * in the `MAPPING` object.
+ *
+ * @param {object} props - The component props.
+ * @param {IconSymbolName} props.name - The name of the icon, based on SF Symbols.
+ * @param {number} [props.size=24] - The size of the icon.
+ * @param {string | OpaqueColorValue} props.color - The color of the icon.
+ * @param {StyleProp<TextStyle>} [props.style] - Optional styles to apply to the icon.
+ * @param {SymbolWeight} [props.weight] - The font weight of the icon (unused in fallback).
+ * @returns {JSX.Element} The rendered Material Icon.
  */
 export function IconSymbol({
   name,

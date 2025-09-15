@@ -1,5 +1,11 @@
 import Animated from 'react-native-reanimated';
 
+/**
+ * A simple animated component that displays a waving hand emoji.
+ * The animation rotates the hand back and forth.
+ *
+ * @returns {JSX.Element} The rendered animated waving hand.
+ */
 export function HelloWave() {
   return (
     <Animated.Text

@@ -9,6 +9,12 @@ import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
 
+/**
+ * The "Explore" screen of the application.
+ * This screen provides information and examples about the app's features.
+ *
+ * @returns {JSX.Element} The rendered "Explore" screen.
+ */
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView

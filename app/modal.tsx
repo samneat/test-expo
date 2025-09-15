@@ -4,6 +4,12 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
+/**
+ * A modal screen component.
+ * This screen is presented on top of the main application content.
+ *
+ * @returns {JSX.Element} The rendered modal screen.
+ */
 export default function ModalScreen() {
   return (
     <ThemedView style={styles.container}>
