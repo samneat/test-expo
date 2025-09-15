@@ -1,11 +1,12 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, Pressable } from 'react-native';
+import { Link, useRouter } from 'expo-router';
 
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { useAuth } from '@/features/auth/AuthContext';
 
 /**
  * The home screen of the application.
@@ -14,6 +15,12 @@ import { Link } from 'expo-router';
  * @returns {JSX.Element} The rendered home screen.
  */
 export default function HomeScreen() {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  if (!user) {
+    router.replace('/login');
+  }
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -80,6 +87,11 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      {user && (
+        <Pressable onPress={logout} style={{ padding: 12, backgroundColor: '#eee', borderRadius: 8 }}>
+          <ThemedText>Logout</ThemedText>
+        </Pressable>
+      )}
     </ParallaxScrollView>
   );
 }
