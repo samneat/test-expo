@@ -1,12 +1,13 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet, Pressable } from 'react-native';
-import { Link, useRouter } from 'expo-router';
+import { Link, useRootNavigationState, useRouter } from 'expo-router';
+import { Platform, Pressable, StyleSheet } from 'react-native';
 
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useAuth } from '@/features/auth/AuthContext';
+import { useEffect, useMemo } from 'react';
 
 /**
  * The home screen of the application.
@@ -15,12 +16,23 @@ import { useAuth } from '@/features/auth/AuthContext';
  * @returns {JSX.Element} The rendered home screen.
  */
 export default function HomeScreen() {
-  const { user, logout } = useAuth();
+  const { user, logout, initializing } = useAuth();
   const router = useRouter();
+  const rootNavigationState = useRootNavigationState();
 
-  if (!user) {
-    router.replace('/login');
-  }
+  useEffect(() => {
+    if (!rootNavigationState?.key) return; // wait for layout to mount
+    if (initializing) return; // wait for auth state
+    if (!user) {
+      // Defer to next tick to avoid navigating during commit phase
+      const id = setTimeout(() => router.replace('/login'), 0);
+      return () => clearTimeout(id);
+    }
+  }, [rootNavigationState?.key, initializing, user]);
+
+  // Avoid rendering the screen until router and auth are ready
+  const isReady = useMemo(() => Boolean(rootNavigationState?.key) && !initializing, [rootNavigationState?.key, initializing]);
+  if (!isReady) return null;
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
