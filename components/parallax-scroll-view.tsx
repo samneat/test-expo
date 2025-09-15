@@ -18,6 +18,16 @@ type Props = PropsWithChildren<{
   headerBackgroundColor: { dark: string; light: string };
 }>;
 
+/**
+ * A scroll view component with a parallax effect for the header image.
+ * As the user scrolls, the header image translates and scales to create a sense of depth.
+ *
+ * @param {Props} props - The component props.
+ * @param {React.ReactNode} props.children - The content to be displayed below the header.
+ * @param {ReactElement} props.headerImage - The image element to be displayed in the header.
+ * @param {{ dark: string; light: string }} props.headerBackgroundColor - The background color for the header in dark and light modes.
+ * @returns {JSX.Element} The rendered parallax scroll view.
+ */
 export default function ParallaxScrollView({
   children,
   headerImage,

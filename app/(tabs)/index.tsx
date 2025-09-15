@@ -7,6 +7,12 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
+/**
+ * The home screen of the application.
+ * This screen welcomes the user and provides initial instructions.
+ *
+ * @returns {JSX.Element} The rendered home screen.
+ */
 export default function HomeScreen() {
   return (
     <ParallaxScrollView

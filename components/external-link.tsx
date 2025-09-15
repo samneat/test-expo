@@ -4,6 +4,15 @@ import { type ComponentProps } from 'react';
 
 type Props = Omit<ComponentProps<typeof Link>, 'href'> & { href: Href & string };
 
+/**
+ * A component for rendering external links.
+ * On native platforms, it opens the link in an in-app browser.
+ * On web, it opens the link in a new tab.
+ *
+ * @param {Props} props - The component props, inheriting from `expo-router/Link`.
+ * @param {string} props.href - The URL to link to.
+ * @returns {JSX.Element} The rendered link component.
+ */
 export function ExternalLink({ href, ...rest }: Props) {
   return (
     <Link

@@ -8,6 +8,17 @@ export type ThemedTextProps = TextProps & {
   type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
 };
 
+/**
+ * A custom Text component that supports theme-based colors and predefined text styles.
+ * It uses the `useThemeColor` hook to apply colors for light and dark modes.
+ *
+ * @param {ThemedTextProps} props - The component props.
+ * @param {StyleProp<TextStyle>} [props.style] - Optional styles to apply to the text.
+ * @param {string} [props.lightColor] - Optional color for light mode.
+ * @param {string} [props.darkColor] - Optional color for dark mode.
+ * @param {'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link'} [props.type='default'] - The predefined style type for the text.
+ * @returns {JSX.Element} The rendered themed text component.
+ */
 export function ThemedText({
   style,
   lightColor,
