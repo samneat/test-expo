@@ -1,18 +1,20 @@
-import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { LoginForm } from '@/features/auth/components';
 import { useAuth } from '@/features/auth/AuthContext';
+import { LoginForm } from '@/features/auth/components';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
 
 export default function LoginScreen() {
   const router = useRouter();
   const { initializing, user, resetPassword } = useAuth();
 
-  if (user && !initializing) {
-    router.replace('/');
-  }
+  React.useEffect(() => {
+    if (user && !initializing) {
+      router.replace('/');
+    }
+  }, [user, initializing, router]);
 
   return (
     <ThemedView style={styles.container}>
@@ -34,5 +36,3 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, justifyContent: 'center' },
 });
-
-
